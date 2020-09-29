@@ -4,11 +4,12 @@ services:
 before_install:
  - echo $PWD
  - docker pull maxposchmann/thermochimica
+ - echo $encrypted_3b9f0b9d36d1_key
  - openssl aes-256-cbc -K $encrypted_3b9f0b9d36d1_key -iv $encrypted_3b9f0b9d36d1_iv -in data/secrets.tar.enc -out data/secrets.tar -d
  - tar xvf data/secrets.tar --directory data/
 
 script:
- - docker run -v $PWD:/thermochimica maxposchmann/thermochimica /bin/bash -c "make; make test; ./run_tests"
+ # - docker run -v $PWD:/thermochimica maxposchmann/thermochimica /bin/bash -c "make; make test; ./run_tests"
  - cat data/secret1
  - cat data/secret2
  - cat data/secret3
